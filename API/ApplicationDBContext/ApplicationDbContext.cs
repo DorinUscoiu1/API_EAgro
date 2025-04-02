@@ -11,7 +11,7 @@ namespace API.ApplicationDBContext
         public DbSet<Farmer> Farmers { get; set; }
         public DbSet<Agent> Agents { get; set; }
         public DbSet<FarmerRating> FarmerRatings { get; set; }
-
+        public DbSet<User> Users { get; set; }
         public DbSet<Agency> Agencies { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
