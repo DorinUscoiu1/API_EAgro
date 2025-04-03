@@ -8,6 +8,15 @@ namespace API.Models
     {
         public MappingProfile()
         {
+
+            CreateMap<Agent, AgentDto>()
+                .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.User.Id))
+                .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.User.Email));
+
+            CreateMap<Farmer, FarmerDto>()
+                .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.User.Id))
+                .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.User.Email));
+
             CreateMap<Animal, AnimalDto>().ReverseMap();
             CreateMap<AnimalDto, Animal>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore());
@@ -34,6 +43,10 @@ namespace API.Models
 
             CreateMap<FarmerRating, FarmerRatingDto>().ReverseMap();
             CreateMap<FarmerRatingDto, FarmerRating>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore());
+
+            CreateMap<User, UserDto>().ReverseMap();
+            CreateMap<UserDto, User>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore());
         }
     }

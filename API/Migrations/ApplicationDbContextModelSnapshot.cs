@@ -65,7 +65,7 @@ namespace API.Migrations
                         {
                             Id = 3,
                             County = "Iași",
-                            Location = "Iași",
+                            Location = "Brasov",
                             Name = "EcoFarm"
                         });
                 });
@@ -85,9 +85,15 @@ namespace API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AgencyId");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("Agents");
 
@@ -96,19 +102,22 @@ namespace API.Migrations
                         {
                             Id = 1,
                             AgencyId = 1,
-                            Name = "Alex Johnson"
+                            Name = "Alex Johnson",
+                            UserId = 1
                         },
                         new
                         {
                             Id = 2,
                             AgencyId = 2,
-                            Name = "Laura Smith"
+                            Name = "Laura Smith",
+                            UserId = 2
                         },
                         new
                         {
                             Id = 3,
                             AgencyId = 3,
-                            Name = "Robert Green"
+                            Name = "Robert Green",
+                            UserId = 3
                         });
                 });
 
@@ -215,9 +224,15 @@ namespace API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AgentId");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("Farmers");
 
@@ -229,7 +244,8 @@ namespace API.Migrations
                             Budget = 10000m,
                             Category = "Livestock",
                             Location = "Village A",
-                            Name = "John Doe"
+                            Name = "John Doe",
+                            UserId = 4
                         },
                         new
                         {
@@ -238,7 +254,8 @@ namespace API.Migrations
                             Budget = 15000m,
                             Category = "Crops",
                             Location = "Village B",
-                            Name = "Jane Smith"
+                            Name = "Jane Smith",
+                            UserId = 5
                         },
                         new
                         {
@@ -247,7 +264,8 @@ namespace API.Migrations
                             Budget = 20000m,
                             Category = "Dairy",
                             Location = "Village C",
-                            Name = "Michael Brown"
+                            Name = "Michael Brown",
+                            UserId = 6
                         },
                         new
                         {
@@ -256,7 +274,8 @@ namespace API.Migrations
                             Budget = 18000m,
                             Category = "Poultry",
                             Location = "Village D",
-                            Name = "Emily Davis"
+                            Name = "Emily Davis",
+                            UserId = 7
                         });
                 });
 
@@ -308,15 +327,15 @@ namespace API.Migrations
                         {
                             Id = 3,
                             Comment = "Needs improvement",
-                            CreatedAt = new DateTime(2024, 1, 3, 10, 15, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2024, 1, 3, 16, 45, 0, 0, DateTimeKind.Utc),
                             FarmerId = 3,
                             Rating = 3
                         },
                         new
                         {
                             Id = 4,
-                            Comment = "Very efficient",
-                            CreatedAt = new DateTime(2024, 1, 4, 9, 45, 0, 0, DateTimeKind.Utc),
+                            Comment = "Excellent produce",
+                            CreatedAt = new DateTime(2024, 1, 4, 9, 15, 0, 0, DateTimeKind.Utc),
                             FarmerId = 4,
                             Rating = 5
                         });
@@ -479,6 +498,64 @@ namespace API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Email = "alex.johnson@example.com",
+                            Name = "Alex Johnson",
+                            Password = "hashedpassword1",
+                            Role = "Agent"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Email = "laura.smith@example.com",
+                            Name = "Laura Smith",
+                            Password = "hashedpassword2",
+                            Role = "Agent"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Email = "robert.green@example.com",
+                            Name = "Robert Green",
+                            Password = "hashedpassword3",
+                            Role = "Agent"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Email = "john.doe@example.com",
+                            Name = "John Doe",
+                            Password = "hashedpassword4",
+                            Role = "Farmer"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Email = "jane.smith@example.com",
+                            Name = "Jane Smith",
+                            Password = "hashedpassword5",
+                            Role = "Farmer"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Email = "michael.brown@example.com",
+                            Name = "Michael Brown",
+                            Password = "hashedpassword6",
+                            Role = "Farmer"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Email = "emily.davis@example.com",
+                            Name = "Emily Davis",
+                            Password = "hashedpassword7",
+                            Role = "Farmer"
+                        });
                 });
 
             modelBuilder.Entity("API.Models.Agent", b =>
@@ -486,10 +563,18 @@ namespace API.Migrations
                     b.HasOne("API.Models.Agency", "Agency")
                         .WithMany("Agents")
                         .HasForeignKey("AgencyId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("API.Models.User", "User")
+                        .WithOne("Agent")
+                        .HasForeignKey("API.Models.Agent", "UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Agency");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("API.Models.Animal", b =>
@@ -512,10 +597,18 @@ namespace API.Migrations
                     b.HasOne("API.Models.Agent", "Agent")
                         .WithMany("Farmers")
                         .HasForeignKey("AgentId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("API.Models.User", "User")
+                        .WithOne("Farmer")
+                        .HasForeignKey("API.Models.Farmer", "UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Agent");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("API.Models.FarmerRating", b =>
@@ -574,6 +667,15 @@ namespace API.Migrations
             modelBuilder.Entity("API.Models.Land", b =>
                 {
                     b.Navigation("Animals");
+                });
+
+            modelBuilder.Entity("API.Models.User", b =>
+                {
+                    b.Navigation("Agent")
+                        .IsRequired();
+
+                    b.Navigation("Farmer")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
