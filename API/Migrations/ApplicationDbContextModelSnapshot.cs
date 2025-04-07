@@ -412,7 +412,7 @@ namespace API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("AnimalId")
+                    b.Property<int>("AnimalId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -440,6 +440,7 @@ namespace API.Migrations
                         new
                         {
                             Id = 1,
+                            AnimalId = 1,
                             Name = "Hay",
                             Price = 500m,
                             Quality = "Good",
@@ -448,26 +449,11 @@ namespace API.Migrations
                         new
                         {
                             Id = 2,
+                            AnimalId = 2,
                             Name = "Corn Feed",
                             Price = 700m,
                             Quality = "Premium",
                             Quantity = 50
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Wheat Bran",
-                            Price = 400m,
-                            Quality = "Standard",
-                            Quantity = 80
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Rice Husk",
-                            Price = 600m,
-                            Quality = "High",
-                            Quantity = 120
                         });
                 });
 
@@ -635,9 +621,13 @@ namespace API.Migrations
 
             modelBuilder.Entity("API.Models.Supply", b =>
                 {
-                    b.HasOne("API.Models.Animal", null)
+                    b.HasOne("API.Models.Animal", "Animal")
                         .WithMany("Supplies")
-                        .HasForeignKey("AnimalId");
+                        .HasForeignKey("AnimalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Animal");
                 });
 
             modelBuilder.Entity("API.Models.Agency", b =>

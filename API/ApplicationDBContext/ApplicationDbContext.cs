@@ -16,7 +16,7 @@ namespace API.ApplicationDBContext
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=DESKTOP-OF88FCU;database=dbFarm;Trusted_Connection=True;TrustServerCertificate=True");
+            optionsBuilder.UseSqlServer(@"Server=DESKTOP-OF88FCU;database=Farming;Trusted_Connection=True;TrustServerCertificate=True");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -73,6 +73,12 @@ namespace API.ApplicationDBContext
                     .WithMany(ag => ag.Agents)
                     .HasForeignKey(a => a.AgencyId)
                     .OnDelete(DeleteBehavior.Restrict);
+
+                modelBuilder.Entity<Supply>()
+    .HasOne(s => s.Animal)
+    .WithMany(a => a.Supplies)
+    .HasForeignKey(s => s.AnimalId)
+    .OnDelete(DeleteBehavior.Cascade);
 
 
                 // Precision settings for specific fields
@@ -131,11 +137,10 @@ namespace API.ApplicationDBContext
 
                 // Seed data for Supply
                 modelBuilder.Entity<Supply>().HasData(
-                    new Supply { Id = 1, Name = "Hay", Quantity = 100, Quality = "Good", Price = 500 },
-                    new Supply { Id = 2, Name = "Corn Feed", Quantity = 50, Quality = "Premium", Price = 700 },
-                    new Supply { Id = 3, Name = "Wheat Bran", Quantity = 80, Quality = "Standard", Price = 400 },
-                    new Supply { Id = 4, Name = "Rice Husk", Quantity = 120, Quality = "High", Price = 600 }
-                );
+     new Supply { Id = 1, Name = "Hay", Quantity = 100, Quality = "Good", Price = 500, AnimalId = 1 },
+     new Supply { Id = 2, Name = "Corn Feed", Quantity = 50, Quality = "Premium", Price = 700, AnimalId = 2 }
+ );
+
 
                 // Seed data for FarmerRating
                 modelBuilder.Entity<FarmerRating>().HasData(
