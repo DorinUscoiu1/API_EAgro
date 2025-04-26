@@ -79,6 +79,7 @@ namespace API.Services
 
         public UserDto Register(UserDto userDto)
         {
+
             if (_context.Users.Any(u => u.Email == userDto.Email))
                 throw new ArgumentException("A user with the same email address already exists");
 

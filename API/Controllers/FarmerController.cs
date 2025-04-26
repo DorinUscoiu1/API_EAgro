@@ -116,5 +116,23 @@ namespace API.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+        [HttpGet("{farmerId}/listings")]
+        public IActionResult GetFarmerListings(int farmerId)
+        {
+            try
+            {
+                var tickets = farmerManager.GetMarketListingsByFarmer(farmerId);
+                return Ok(tickets);
+            }
+            catch (ArgumentException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
     }
 }

@@ -14,6 +14,7 @@ namespace API.ApplicationDBContext
         public DbSet<User> Users { get; set; }
         public DbSet<Agency> Agencies { get; set; }
 
+        public DbSet<MarketItem> MarketItems { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server=DESKTOP-OF88FCU;database=Farming;Trusted_Connection=True;TrustServerCertificate=True");
@@ -75,10 +76,16 @@ namespace API.ApplicationDBContext
                     .OnDelete(DeleteBehavior.Restrict);
 
                 modelBuilder.Entity<Supply>()
-    .HasOne(s => s.Animal)
-    .WithMany(a => a.Supplies)
-    .HasForeignKey(s => s.AnimalId)
-    .OnDelete(DeleteBehavior.Cascade);
+                    .HasOne(s => s.Animal)
+                    .WithMany(a => a.Supplies)
+                    .HasForeignKey(s => s.AnimalId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                modelBuilder.Entity<MarketItem>()
+                    .HasOne(mi => mi.SellerFarmer)
+                    .WithMany(f => f.MarketSales)
+                    .HasForeignKey(mi => mi.SellerFarmerId)
+                    .OnDelete(DeleteBehavior.Cascade);
 
 
                 // Precision settings for specific fields
@@ -86,11 +93,15 @@ namespace API.ApplicationDBContext
                 modelBuilder.Entity<Supply>().Property(s => s.Price).HasPrecision(18, 2);
                 modelBuilder.Entity<Farmer>().Property(f => f.Budget).HasPrecision(18, 2);
 
+                modelBuilder.Entity<MarketItem>().Property(mi => mi.Price).HasPrecision(18, 2);
+
                 // Seed data for Agency
                 modelBuilder.Entity<Agency>().HasData(
-                    new Agency { Id = 1, Name = "AgroExperts", County = "Cluj", Location = "Cluj-Napoca" },
-                    new Agency { Id = 2, Name = "FarmAssist", County = "Timiș", Location = "Timișoara" },
-                    new Agency { Id = 3, Name = "EcoFarm", County = "Iași", Location = "Brasov" }
+                    new Agency { Id = 1, Name = "AgroExperts", County = "Brasov", Location = "Brasov" },
+                    new Agency { Id = 2, Name = "FarmAssist", County = "Brasov", Location = "Poiana Marului" },
+                    new Agency { Id = 3, Name = "EcoFarm", County = "Brasov", Location = "Sercaia" },
+                    new Agency { Id = 4, Name = "Centrul Local Fagaras", County = "Brasov", Location = "Fagaras" },
+                    new Agency { Id = 5, Name = "Centrul Local Codlea", County = "Brasov", Location = "Codlea" }
                 );
 
                 // Seed data for User
@@ -113,10 +124,10 @@ namespace API.ApplicationDBContext
 
                 // Seed data for Farmer
                 modelBuilder.Entity<Farmer>().HasData(
-                    new Farmer { Id = 1, UserId = 4, Name = "John Doe", Location = "Village A", Budget = 10000, Category = "Livestock", AgentId = 1 },
-                    new Farmer { Id = 2, UserId = 5, Name = "Jane Smith", Location = "Village B", Budget = 15000, Category = "Crops", AgentId = 2 },
-                    new Farmer { Id = 3, UserId = 6, Name = "Michael Brown", Location = "Village C", Budget = 20000, Category = "Dairy", AgentId = 1 },
-                    new Farmer { Id = 4, UserId = 7, Name = "Emily Davis", Location = "Village D", Budget = 18000, Category = "Poultry", AgentId = 3 }
+                    new Farmer { Id = 1, UserId = 4, Name = "John Doe", Location = "Sinca Noua", Budget = 10000, Category = "Livestock", AgentId = 1 },
+                    new Farmer { Id = 2, UserId = 5, Name = "Jane Smith", Location = "Poiana Marului", Budget = 15000, Category = "Crops", AgentId = 2 },
+                    new Farmer { Id = 3, UserId = 6, Name = "Michael Brown", Location = "Sinca Veche", Budget = 20000, Category = "Dairy", AgentId = 1 },
+                    new Farmer { Id = 4, UserId = 7, Name = "Emily Davis", Location = "Sinca Noua", Budget = 18000, Category = "Poultry", AgentId = 3 }
                 );
 
                 // Seed data for Land
@@ -149,6 +160,13 @@ namespace API.ApplicationDBContext
                     new FarmerRating { Id = 3, FarmerId = 3, Rating = 3, Comment = "Needs improvement", CreatedAt = new DateTime(2024, 1, 3, 16, 45, 0, DateTimeKind.Utc) },
                     new FarmerRating { Id = 4, FarmerId = 4, Rating = 5, Comment = "Excellent produce", CreatedAt = new DateTime(2024, 1, 4, 9, 15, 0, DateTimeKind.Utc) }
                 );
+
+                modelBuilder.Entity<MarketItem>().HasData(
+            new MarketItem { Id = 1, ItemType = "Animal", ItemId = 1, Price = 1500, SellerFarmerId = 1 },
+            new MarketItem { Id = 2, ItemType = "Animal", ItemId = 2, Price = 300, SellerFarmerId = 2 },
+            new MarketItem { Id = 3, ItemType = "Land", ItemId = 1, Price = 5000, SellerFarmerId = 1 },
+            new MarketItem { Id = 4, ItemType = "Supply", ItemId = 1, Price = 500, SellerFarmerId = 3 }
+        );
             }
         }
     }

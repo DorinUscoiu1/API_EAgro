@@ -404,6 +404,79 @@ namespace API.Migrations
                         });
                 });
 
+            modelBuilder.Entity("API.Models.MarketItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IsSold")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("ItemId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ItemType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("SellerFarmerId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("SoldAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SellerFarmerId");
+
+                    b.ToTable("MarketItems");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            IsSold = false,
+                            ItemId = 1,
+                            ItemType = "Animal",
+                            Price = 1500m,
+                            SellerFarmerId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            IsSold = false,
+                            ItemId = 2,
+                            ItemType = "Animal",
+                            Price = 300m,
+                            SellerFarmerId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            IsSold = false,
+                            ItemId = 1,
+                            ItemType = "Land",
+                            Price = 5000m,
+                            SellerFarmerId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            IsSold = false,
+                            ItemId = 1,
+                            ItemType = "Supply",
+                            Price = 500m,
+                            SellerFarmerId = 3
+                        });
+                });
+
             modelBuilder.Entity("API.Models.Supply", b =>
                 {
                     b.Property<int>("Id")
@@ -619,6 +692,17 @@ namespace API.Migrations
                     b.Navigation("Farmer");
                 });
 
+            modelBuilder.Entity("API.Models.MarketItem", b =>
+                {
+                    b.HasOne("API.Models.Farmer", "SellerFarmer")
+                        .WithMany("MarketSales")
+                        .HasForeignKey("SellerFarmerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("SellerFarmer");
+                });
+
             modelBuilder.Entity("API.Models.Supply", b =>
                 {
                     b.HasOne("API.Models.Animal", "Animal")
@@ -652,6 +736,8 @@ namespace API.Migrations
                     b.Navigation("FarmersRatings");
 
                     b.Navigation("Lands");
+
+                    b.Navigation("MarketSales");
                 });
 
             modelBuilder.Entity("API.Models.Land", b =>

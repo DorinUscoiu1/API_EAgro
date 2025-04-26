@@ -25,6 +25,8 @@ namespace API.Models
         public List<Animal> Animals { get; set; }
 
         public List<FarmerRating> FarmersRatings { get; set; }
+
+        public List<MarketItem> MarketSales { get; set; } = new();
     }
 
 }

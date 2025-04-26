@@ -61,7 +61,7 @@ namespace API.Services
         public List<LandDto> GetFarmerLands(int farmerId)
         {
             var farmer = _context.Farmers
-                .Include(f => f.Lands) // Include terenurile
+                .Include(f => f.Lands)
                 .FirstOrDefault(f => f.Id == farmerId);
 
             if (farmer == null)
@@ -74,7 +74,7 @@ namespace API.Services
         public List<AnimalDto> GetFarmerAnimals(int farmerId)
         {
             var farmer = _context.Farmers
-                .Include(f => f.Animals) // Include animalele
+                .Include(f => f.Animals)
                 .FirstOrDefault(f => f.Id == farmerId);
 
             if (farmer == null)
@@ -83,6 +83,15 @@ namespace API.Services
             }
 
             return _mapper.Map<List<AnimalDto>>(farmer.Animals);
+        }
+        public List<MarketItemDto> GetMarketListingsByFarmer(int farmerId)
+        {
+            var items = _context.MarketItems.Where(m => m.SellerFarmerId == farmerId).ToList();
+            if (items == null)
+            {
+                throw new Exception("Farmer not found!");
+            }
+            return _mapper.Map<List<MarketItemDto>>(items);
         }
 
     }
