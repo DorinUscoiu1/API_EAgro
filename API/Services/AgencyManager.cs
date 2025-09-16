@@ -44,15 +44,28 @@ namespace API.Services
         }
         public void RemoveAgency(int agencyId)
         {
-            var agency=_context.Agencies.FirstOrDefault(a=> a.Id==agencyId);
-            if (agency == null) throw new Exception("Agency not found!");
-            _context.Agencies.Remove(agency);
-            _context.SaveChanges();
+            using (var context = new ApplicationDbContext())
+            {
+                var agency = context.Agencies
+                    .Include(a => a.Agents)
+                    .FirstOrDefault(a => a.Id == agencyId);
+
+                if (agency == null)
+                    throw new Exception($"Agency with ID {agencyId} not found.");
+
+                if (agency.Agents.Any())
+                    throw new InvalidOperationException("Cannot delete agency with agents assigned.");
+
+                context.Agencies.Remove(agency);
+                context.SaveChanges();
+            }
         }
+
         public List<AgentDto> GetAgencyAgents(int agencyId)
         {
             var agency = _context.Agencies
                 .Include(f => f.Agents)
+                .ThenInclude(a => a.User)
                 .FirstOrDefault(f => f.Id == agencyId);
 
             if (agency == null)

@@ -76,22 +76,22 @@ namespace API.Controllers
                 return NotFound(ex.Message);
             }
         }
-        [HttpGet("{animaldId}/supplies")]
-        public IActionResult GetAnimalSupplies(int animalId)
-        {
-            try
-            {
-                var tickets = _animalManager.GetAnimalSupplies(animalId);
-                return Ok(tickets);
-            }
-            catch (ArgumentException ex)
-            {
-                return NotFound(ex.Message);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
-        }
+        //[HttpGet("{animaldId}/supplies")]
+        //public IActionResult GetAnimalSupplies(int animalId)
+        //{
+        //    try
+        //    {
+        //        var tickets = _animalManager.GetAnimalSupplies(animalId);
+        //        return Ok(tickets);
+        //    }
+        //    catch (ArgumentException ex)
+        //    {
+        //        return NotFound(ex.Message);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(500, ex.Message);
+        //    }
+        //}
     }
 }

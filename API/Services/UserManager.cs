@@ -86,6 +86,21 @@ namespace API.Services
             var user = _mapper.Map<User>(userDto);
             _context.Users.Add(user);
             _context.SaveChanges();
+            if (user.Role == "Farmer")
+            {
+                var farmer = new Farmer
+                {
+                    UserId = user.Id,
+                    Name = user.Name,
+                    Location = "Default Location",
+                    AgentId = 1,
+                    Category = "Mic",
+                    Email = user.Email,
+                    Budget = 1000,
+                };
+                _context.Farmers.Add(farmer);
+                _context.SaveChanges();
+            }
             return _mapper.Map<UserDto>(user);
         }
     }

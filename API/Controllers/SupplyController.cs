@@ -1,6 +1,8 @@
-﻿using API.DTOs;
+﻿using API.ApplicationDBContext;
+using API.DTOs;
 using API.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace API_LICENTA.Controllers
 {
@@ -75,5 +77,6 @@ namespace API_LICENTA.Controllers
                 return NotFound(ex.Message);
             }
         }
+
     }
 }

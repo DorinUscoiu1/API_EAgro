@@ -15,6 +15,26 @@ namespace API.Controllers
         {
             return Ok(_marketManager.GetAllMarketItems());
         }
+        [HttpGet("{id}")]
+        public IActionResult GetMarketItemById(int id)
+        {
+            var item = _marketManager.GetMarketItemById(id);
+            if (item == null) return NotFound("Item not found");
+            return Ok(item);
+        }
+        [HttpPost("buy/{id}")]
+        public IActionResult BuyMarketItem(int id, [FromBody] int buyerFarmerId)
+        {
+            try
+            {
+                _marketManager.MarkItemAsSoldToBuyer(id, buyerFarmerId);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
         [HttpGet("farmer/{farmerId}")]
         public IActionResult GetMarketItemsByFarmer(int farmerId)

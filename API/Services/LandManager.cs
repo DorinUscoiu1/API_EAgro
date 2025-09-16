@@ -46,11 +46,31 @@ namespace API.Services
                 throw new Exception("Land not found");
             }
         }
+        public bool IsLandBoughtByCurrentOwner(int landId, int currentFarmerId)
+        {
+            var item = _context.MarketItems
+                .FirstOrDefault(i =>
+                    i.ItemType == "Land" &&
+                    i.ItemId == landId &&
+                    i.IsSold &&
+                    i.BuyerFarmerId == currentFarmerId);
+
+            return item != null;
+        }
+
         public void RemoveLand(int landId)
         {
             var land = _context.Lands.FirstOrDefault(a => a.Id == landId);
+            
             if (land != null)
             {
+                var marketItem = _context.MarketItems
+            .FirstOrDefault(m => m.ItemType == "Land" && m.ItemId == landId);
+
+                if (marketItem != null)
+                {
+                    _context.MarketItems.Remove(marketItem);
+                }
                 _context.Lands.Remove(land);
                 _context.SaveChanges();
             }

@@ -14,6 +14,10 @@ namespace API.Models
         public User User { get; set; }
 
         public string Name { get; set; }
+        public string Email { get; set; }
+        [NotMapped]
+        public string Phone => User?.Phone;
+
         public int AgencyId { get; set; }
         [ForeignKey("AgencyId")]
         public Agency Agency { get; set; }

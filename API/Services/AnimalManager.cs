@@ -64,18 +64,21 @@ namespace API.Services
                 throw new Exception("Animal not found");
             }
         }
-        public List<SupplyDto> GetAnimalSupplies(int animalId)
-        {
-            var animal = _context.Animals
-                .Include(f => f.Supplies)
-                .FirstOrDefault(f => f.Id == animalId);
+        //public List<AnimalSupplyDto> GetAnimalSupplies(int animalId)
+        //{
+        //    var animal = _context.Animals
+        //        .Include(a => a.AnimalSupplies) // include tabela de legătură
+        //            .ThenInclude(asup => asup.Supply) // apoi include supply-ul din legătură
+        //        .FirstOrDefault(a => a.Id == animalId);
 
-            if (animal == null)
-            {
-                throw new Exception("Animal not found!");
-            }
+        //    if (animal == null)
+        //    {
+        //        throw new Exception("Animal not found!");
+        //    }
 
-            return _mapper.Map<List<SupplyDto>>(animal.Supplies);
-        }
+        //    // Mapăm fiecare AnimalSupply în DTO cu supply + quantity
+        //    return _mapper.Map<List<AnimalSupplyDto>>(animal.AnimalSupplies);
+        //}
+
     }
 }

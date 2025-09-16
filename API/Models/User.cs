@@ -15,11 +15,13 @@ namespace API.Models
         [Required, EmailAddress]
         public string Email { get; set; }
 
+        public string? Phone {  get; set; }
+
         [Required]
         public string Password { get; set; }
 
         [Required]
-        public string Role { get; set; }  // "Agent" sau "Farmer"
+        public string Role { get; set; }  
 
         public Agent Agent { get; set; }
         public Farmer Farmer { get; set; }

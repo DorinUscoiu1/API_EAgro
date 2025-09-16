@@ -1,8 +1,10 @@
-﻿using API.DTOs;
+﻿using API.ApplicationDBContext;
+using API.DTOs;
 using API.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
@@ -76,19 +78,36 @@ namespace API.Controllers
             {
                 return NotFound(ex.Message);
             }
-            catch
+            catch (Exception ex)
             {
-                return BadRequest("the request is not valid");
+                return BadRequest(ex.ToString());
             }
 
         }
         [HttpGet("{farmerId}/lands")]
-        public IActionResult GetUserTickets(int farmerId)
+        public IActionResult GetFarmerLands(int farmerId, [FromQuery] string location = null, [FromQuery] string county = null, [FromQuery] string type = null)
         {
             try
             {
-                var tickets = farmerManager.GetFarmerLands(farmerId);
-                return Ok(tickets);
+                var lands = farmerManager.GetFarmerLandsFiltered(farmerId, location, county, type);
+                return Ok(lands);
+            }
+            catch (ArgumentException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpGet("{farmerId}/otherlands")]
+        public IActionResult GetOtherFarmerLands(int farmerId)
+        {
+            try
+            {
+                var lands = farmerManager.GetOtherFarmerLands(farmerId);
+                return Ok(lands);
             }
             catch (ArgumentException ex)
             {
@@ -105,6 +124,40 @@ namespace API.Controllers
             try
             {
                 var tickets = farmerManager.GetFarmerAnimals(farmerId);
+                return Ok(tickets);
+            }
+            catch (ArgumentException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpGet("{farmerId}/landsTotalArea")]
+        public IActionResult GetFarmerSurface(int farmerId)
+        {
+            try
+            {
+                var area = farmerManager.GetTotalArea(farmerId);
+                return Ok(area);
+            }
+            catch (ArgumentException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpGet("{farmerId}/ratings")]
+        public IActionResult GetFarmerRatings(int farmerId)
+        {
+            try
+            {
+                var tickets = farmerManager.GetFarmerRatings(farmerId);
                 return Ok(tickets);
             }
             catch (ArgumentException ex)
@@ -133,6 +186,85 @@ namespace API.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+        
+        [HttpGet("by-user/{userId}")]
+        public IActionResult GetFarmerByUserId(int userId)
+        {
+            try
+            {
+                var farmer = farmerManager.GetFarmerByUserId(userId);
+                if (farmer == null)
+                    return NotFound($"No farmer found for user ID {userId}");
+                return Ok(farmer);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpGet("{farmerId}/funding-request")]
+        public IActionResult GetFundingRequestByFarmerId(int farmerId)
+        {
+            try
+            {
+                var requestDto = farmerManager.GetFundingRequestByFarmerId(farmerId);
 
+                return Ok(requestDto);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet("{farmerId}/animalfunding-request")]
+        public IActionResult GetAnimalsFundingRequestByFarmerId(int farmerId)
+        {
+            try
+            {
+                var requestDto = farmerManager.GetAnimalFundingRequestByFarmerId(farmerId);
+
+                return Ok(requestDto);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpGet("{farmerId}/supplies")]
+        public IActionResult GetFarmerSupplies(int farmerId)
+        {
+            try
+            {
+                var supplies = farmerManager.GetFarmerSupplies(farmerId);
+                return Ok(supplies);
+            }
+            catch (ArgumentException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpPost("{farmerId}/buy-supply")]
+        public IActionResult BuySupply(int farmerId, [FromQuery] int supplyId, [FromQuery] int quantity)
+        {
+            try
+            {
+                farmerManager.BuySupply(farmerId, supplyId, quantity);
+                return Ok("Cumpărare realizată.");
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
     }
 }

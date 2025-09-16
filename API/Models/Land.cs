@@ -10,6 +10,7 @@ namespace API.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int Id { get; set; }
+        public string County { get; set; }
         public string Location { get; set; }
         public string Type { get; set; }
         public double Area { get; set; }
@@ -17,8 +18,7 @@ namespace API.Models
         public int FarmerId { get; set; }
         [ForeignKey("FarmerId")]
         public Farmer Farmer { get; set; }
-
-        public List<Animal> Animals { get; set; } = new();
+        public string CoordinatesJson { get; set; }
     }
 
 }

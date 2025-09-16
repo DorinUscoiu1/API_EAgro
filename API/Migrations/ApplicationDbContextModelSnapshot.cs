@@ -30,6 +30,10 @@ namespace API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("County")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -42,6 +46,10 @@ namespace API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Agencies");
@@ -50,23 +58,101 @@ namespace API.Migrations
                         new
                         {
                             Id = 1,
-                            County = "Cluj",
-                            Location = "Cluj-Napoca",
-                            Name = "AgroExperts"
+                            Address = "Strada Agricultorilor nr. 10",
+                            County = "Brasov",
+                            Location = "Brasov",
+                            Name = "AgroExperts",
+                            Type = "Judetean"
                         },
                         new
                         {
                             Id = 2,
-                            County = "Timiș",
-                            Location = "Timișoara",
-                            Name = "FarmAssist"
+                            Address = "Strada Principală nr. 45",
+                            County = "Brasov",
+                            Location = "Poiana Marului",
+                            Name = "FarmAssist",
+                            Type = "Local"
                         },
                         new
                         {
                             Id = 3,
-                            County = "Iași",
-                            Location = "Brasov",
-                            Name = "EcoFarm"
+                            Address = "Strada Morii nr. 22",
+                            County = "Brasov",
+                            Location = "Sercaia",
+                            Name = "EcoFarm",
+                            Type = "Local"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Address = "Str. Ecaterina Teodoroiu, nr. 38A",
+                            County = "Brasov",
+                            Location = "Brașov",
+                            Name = "Centrul Județean Brașov",
+                            Type = "Judetean"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Address = "str. Laterală, nr. 224",
+                            County = "Brasov",
+                            Location = "Poiana Mărului",
+                            Name = "Centrul Local Poiana Mărului",
+                            Type = "Local"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Address = "str.Principală, nr. 82",
+                            County = "Brasov",
+                            Location = "Șercaia",
+                            Name = "Centrul Local Șercaia",
+                            Type = "Local"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Address = "str. Cetății, nr. 40",
+                            County = "Brasov",
+                            Location = "Făgăraș",
+                            Name = "Centrul Local Făgăraș",
+                            Type = "Local"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Address = "str. Muntişor, nr. 1",
+                            County = "Brasov",
+                            Location = "Codlea",
+                            Name = "Centrul Local Codlea",
+                            Type = "Local"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Address = "str. Ştefan Ludwig Roth, nr. 565 A,",
+                            County = "Brasov",
+                            Location = "Prejmer",
+                            Name = "Centrul Local Prejmer",
+                            Type = "Local"
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Address = "str.Republicii nr. 166",
+                            County = "Brasov",
+                            Location = "Rupea",
+                            Name = "Centrul Local Rupea",
+                            Type = "Local"
+                        },
+                        new
+                        {
+                            Id = 22,
+                            Address = "str. Piața Unirii, nr. 20",
+                            County = "Brasov",
+                            Location = "Râșnov",
+                            Name = "Centrul Local Râșnov",
+                            Type = "Local"
                         });
                 });
 
@@ -80,6 +166,10 @@ namespace API.Migrations
 
                     b.Property<int>("AgencyId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -102,6 +192,7 @@ namespace API.Migrations
                         {
                             Id = 1,
                             AgencyId = 1,
+                            Email = "alex.johnson@example.com",
                             Name = "Alex Johnson",
                             UserId = 1
                         },
@@ -109,6 +200,7 @@ namespace API.Migrations
                         {
                             Id = 2,
                             AgencyId = 2,
+                            Email = "laura.smith@example.com",
                             Name = "Laura Smith",
                             UserId = 2
                         },
@@ -116,8 +208,97 @@ namespace API.Migrations
                         {
                             Id = 3,
                             AgencyId = 3,
+                            Email = "robert.green@example.com",
                             Name = "Robert Green",
                             UserId = 3
+                        },
+                        new
+                        {
+                            Id = 12,
+                            AgencyId = 13,
+                            Email = "ion.popescu@apia.ro",
+                            Name = "Ion Popescu",
+                            UserId = 37
+                        },
+                        new
+                        {
+                            Id = 13,
+                            AgencyId = 14,
+                            Email = "maria.ionescu@apia.ro",
+                            Name = "Maria Ionescu",
+                            UserId = 38
+                        },
+                        new
+                        {
+                            Id = 14,
+                            AgencyId = 15,
+                            Email = "vasile.georgescu@apia.ro",
+                            Name = "Vasile Georgescu",
+                            UserId = 39
+                        },
+                        new
+                        {
+                            Id = 15,
+                            AgencyId = 16,
+                            Email = "elena.dumitrescu@apia.ro",
+                            Name = "Elena Dumitrescu",
+                            UserId = 40
+                        },
+                        new
+                        {
+                            Id = 16,
+                            AgencyId = 17,
+                            Email = "mihai.marin@apia.ro",
+                            Name = "Mihai Marin",
+                            UserId = 41
+                        },
+                        new
+                        {
+                            Id = 17,
+                            AgencyId = 18,
+                            Email = "ana.vasilescu@apia.ro",
+                            Name = "Ana Vasilescu",
+                            UserId = 42
+                        },
+                        new
+                        {
+                            Id = 18,
+                            AgencyId = 19,
+                            Email = "cristian.ene@apia.ro",
+                            Name = "Cristian Ene",
+                            UserId = 43
+                        },
+                        new
+                        {
+                            Id = 21,
+                            AgencyId = 22,
+                            Email = "ioana.neagu@apia.ro",
+                            Name = "Ioana Neagu",
+                            UserId = 46
+                        },
+                        new
+                        {
+                            Id = 23,
+                            AgencyId = 13,
+                            Email = "monica.florescu@apia.ro",
+                            Name = "Monica Florescu",
+                            UserId = 48
+                        },
+                        new
+                        {
+                            Id = 24,
+                            AgencyId = 14,
+                            Email = "george.petrescu@apia.ro",
+                            Name = "George Petrescu",
+                            UserId = 49
+                        },
+                        new
+                        {
+                            Id = 25,
+                            AgencyId = 15,
+                            Email = "daniela.voicu@apia.ro",
+                            Name = "Daniela Voicu",
+                            UserId = 50
                         });
                 });
 
@@ -129,14 +310,14 @@ namespace API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("AnimalFundingRequestId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Breed")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("FarmerId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("LandId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -152,9 +333,9 @@ namespace API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FarmerId");
+                    b.HasIndex("AnimalFundingRequestId");
 
-                    b.HasIndex("LandId");
+                    b.HasIndex("FarmerId");
 
                     b.ToTable("Animals");
 
@@ -197,6 +378,55 @@ namespace API.Migrations
                         });
                 });
 
+            modelBuilder.Entity("API.Models.AnimalFundingRequest", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AgentComment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("FarmerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FarmerId")
+                        .IsUnique();
+
+                    b.ToTable("AnimalFundingRequests");
+                });
+
+            modelBuilder.Entity("API.Models.AnimalPaymentScheme", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("AmountPerHead")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AnimalPaymentSchemes");
+                });
+
             modelBuilder.Entity("API.Models.Farmer", b =>
                 {
                     b.Property<int>("Id")
@@ -213,6 +443,10 @@ namespace API.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Category")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -243,7 +477,8 @@ namespace API.Migrations
                             AgentId = 1,
                             Budget = 10000m,
                             Category = "Livestock",
-                            Location = "Village A",
+                            Email = "john.doe@example.com",
+                            Location = "Sinca Noua",
                             Name = "John Doe",
                             UserId = 4
                         },
@@ -253,7 +488,8 @@ namespace API.Migrations
                             AgentId = 2,
                             Budget = 15000m,
                             Category = "Crops",
-                            Location = "Village B",
+                            Email = "jane.smith@example.com",
+                            Location = "Poiana Marului",
                             Name = "Jane Smith",
                             UserId = 5
                         },
@@ -263,7 +499,8 @@ namespace API.Migrations
                             AgentId = 1,
                             Budget = 20000m,
                             Category = "Dairy",
-                            Location = "Village C",
+                            Email = "michael.brown@example.com",
+                            Location = "Sinca Veche",
                             Name = "Michael Brown",
                             UserId = 6
                         },
@@ -273,7 +510,8 @@ namespace API.Migrations
                             AgentId = 3,
                             Budget = 18000m,
                             Category = "Poultry",
-                            Location = "Village D",
+                            Email = "emily.davis@example.com",
+                            Location = "Sinca Noua",
                             Name = "Emily Davis",
                             UserId = 7
                         });
@@ -338,6 +576,56 @@ namespace API.Migrations
                             CreatedAt = new DateTime(2024, 1, 4, 9, 15, 0, 0, DateTimeKind.Utc),
                             FarmerId = 4,
                             Rating = 5
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Comment = "Excellent produce",
+                            CreatedAt = new DateTime(2024, 1, 4, 9, 15, 0, 0, DateTimeKind.Utc),
+                            FarmerId = 9,
+                            Rating = 5
+                        });
+                });
+
+            modelBuilder.Entity("API.Models.FarmerSupply", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("FarmerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SupplyId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FarmerId");
+
+                    b.HasIndex("SupplyId");
+
+                    b.ToTable("FarmerSupplies");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 2,
+                            FarmerId = 2,
+                            Quantity = 30,
+                            SupplyId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            FarmerId = 9,
+                            Quantity = 20,
+                            SupplyId = 3
                         });
                 });
 
@@ -352,7 +640,18 @@ namespace API.Migrations
                     b.Property<double>("Area")
                         .HasColumnType("float");
 
+                    b.Property<string>("CoordinatesJson")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("County")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("FarmerId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("LandFundingRequestId")
                         .HasColumnType("int");
 
                     b.Property<string>("Location")
@@ -367,6 +666,8 @@ namespace API.Migrations
 
                     b.HasIndex("FarmerId");
 
+                    b.HasIndex("LandFundingRequestId");
+
                     b.ToTable("Lands");
 
                     b.HasData(
@@ -374,6 +675,8 @@ namespace API.Migrations
                         {
                             Id = 1,
                             Area = 50.0,
+                            CoordinatesJson = "[{\"lat\":45.7401,\"lng\":25.0659},{\"lat\":45.7402,\"lng\":25.0663},{\"lat\":45.7403,\"lng\":25.0660}]",
+                            County = "Brasov",
                             FarmerId = 1,
                             Location = "Field 1",
                             Type = "Pasture"
@@ -382,6 +685,8 @@ namespace API.Migrations
                         {
                             Id = 2,
                             Area = 30.0,
+                            CoordinatesJson = "[{\"lat\":45.7410,\"lng\":25.0671},{\"lat\":45.7412,\"lng\":25.0675},{\"lat\":45.7411,\"lng\":25.0672}]",
+                            County = "Brasov",
                             FarmerId = 2,
                             Location = "Field 2",
                             Type = "Corn"
@@ -390,6 +695,8 @@ namespace API.Migrations
                         {
                             Id = 3,
                             Area = 40.0,
+                            CoordinatesJson = "[{\"lat\":45.7425,\"lng\":25.0680},{\"lat\":45.7427,\"lng\":25.0683},{\"lat\":45.7426,\"lng\":25.0681}]",
+                            County = "Brasov",
                             FarmerId = 3,
                             Location = "Field 3",
                             Type = "Wheat"
@@ -398,9 +705,41 @@ namespace API.Migrations
                         {
                             Id = 4,
                             Area = 60.0,
+                            CoordinatesJson = "[{\"lat\":45.7430,\"lng\":25.0690},{\"lat\":45.7432,\"lng\":25.0695},{\"lat\":45.7431,\"lng\":25.0692}]",
+                            County = "Brasov",
                             FarmerId = 4,
                             Location = "Field 4",
                             Type = "Rice"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Area = 25.0,
+                            CoordinatesJson = "[{\"lat\":45.7416,\"lng\":25.1282},{\"lat\":45.7418,\"lng\":25.1287},{\"lat\":45.7415,\"lng\":25.1285}]",
+                            County = "Brasov",
+                            FarmerId = 9,
+                            Location = "Șinca Nouă",
+                            Type = "Fâneață"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Area = 25.0,
+                            CoordinatesJson = "[{\"lat\":45.7416,\"lng\":25.1282},{\"lat\":45.7418,\"lng\":25.1287},{\"lat\":45.7415,\"lng\":25.1285}]",
+                            County = "Brasov",
+                            FarmerId = 9,
+                            Location = "Șinca Nouă",
+                            Type = "Fâneață"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Area = 25.0,
+                            CoordinatesJson = "[{\"lat\":45.7416,\"lng\":25.1282},{\"lat\":45.7418,\"lng\":25.1287},{\"lat\":45.7415,\"lng\":25.1285}]",
+                            County = "Brasov",
+                            FarmerId = 9,
+                            Location = "Șinca Nouă",
+                            Type = "Fâneață"
                         });
                 });
 
@@ -411,6 +750,9 @@ namespace API.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("BuyerFarmerId")
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsSold")
                         .HasColumnType("bit");
@@ -426,13 +768,15 @@ namespace API.Migrations
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("SellerFarmerId")
+                    b.Property<int?>("SellerFarmerId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("SoldAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BuyerFarmerId");
 
                     b.HasIndex("SellerFarmerId");
 
@@ -477,7 +821,7 @@ namespace API.Migrations
                         });
                 });
 
-            modelBuilder.Entity("API.Models.Supply", b =>
+            modelBuilder.Entity("API.Models.PaymentScheme", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -485,8 +829,25 @@ namespace API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AnimalId")
+                    b.Property<decimal>("AmountPerHectare")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("LandType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PaymentSchemes");
+                });
+
+            modelBuilder.Entity("API.Models.Supply", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -505,15 +866,12 @@ namespace API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AnimalId");
-
                     b.ToTable("Supplies");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            AnimalId = 1,
                             Name = "Hay",
                             Price = 500m,
                             Quality = "Good",
@@ -522,7 +880,6 @@ namespace API.Migrations
                         new
                         {
                             Id = 2,
-                            AnimalId = 2,
                             Name = "Corn Feed",
                             Price = 700m,
                             Quality = "Premium",
@@ -550,6 +907,9 @@ namespace API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Role")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -564,7 +924,8 @@ namespace API.Migrations
                             Id = 1,
                             Email = "alex.johnson@example.com",
                             Name = "Alex Johnson",
-                            Password = "hashedpassword1",
+                            Password = "d4f0bc5a29de06b510f9aa428f1eedba926012b591fef7a518e776a7c9bd1824",
+                            Phone = "0712345678",
                             Role = "Agent"
                         },
                         new
@@ -573,6 +934,7 @@ namespace API.Migrations
                             Email = "laura.smith@example.com",
                             Name = "Laura Smith",
                             Password = "hashedpassword2",
+                            Phone = "0722334455",
                             Role = "Agent"
                         },
                         new
@@ -581,6 +943,7 @@ namespace API.Migrations
                             Email = "robert.green@example.com",
                             Name = "Robert Green",
                             Password = "hashedpassword3",
+                            Phone = "0733445566",
                             Role = "Agent"
                         },
                         new
@@ -589,6 +952,7 @@ namespace API.Migrations
                             Email = "john.doe@example.com",
                             Name = "John Doe",
                             Password = "hashedpassword4",
+                            Phone = "0744556677",
                             Role = "Farmer"
                         },
                         new
@@ -597,6 +961,7 @@ namespace API.Migrations
                             Email = "jane.smith@example.com",
                             Name = "Jane Smith",
                             Password = "hashedpassword5",
+                            Phone = "0755667788",
                             Role = "Farmer"
                         },
                         new
@@ -605,6 +970,7 @@ namespace API.Migrations
                             Email = "michael.brown@example.com",
                             Name = "Michael Brown",
                             Password = "hashedpassword6",
+                            Phone = "0766778899",
                             Role = "Farmer"
                         },
                         new
@@ -613,8 +979,146 @@ namespace API.Migrations
                             Email = "emily.davis@example.com",
                             Name = "Emily Davis",
                             Password = "hashedpassword7",
+                            Phone = "0777889900",
                             Role = "Farmer"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Email = "dorin.uscoiu@apia.ro",
+                            Name = "Dorin Uscoiu",
+                            Password = "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918",
+                            Phone = "0777889900",
+                            Role = "Admin"
+                        },
+                        new
+                        {
+                            Id = 37,
+                            Email = "ion.popescu@apia.ro",
+                            Name = "Ion Popescu",
+                            Password = "d4f0bc5a29de06b510f9aa428f1eedba926012b591fef7a518e776a7c9bd1824",
+                            Phone = "0700000001",
+                            Role = "Agent"
+                        },
+                        new
+                        {
+                            Id = 38,
+                            Email = "maria.ionescu@apia.ro",
+                            Name = "Maria Ionescu",
+                            Password = "d4f0bc5a29de06b510f9aa428f1eedba926012b591fef7a518e776a7c9bd1824",
+                            Phone = "0700000002",
+                            Role = "Agent"
+                        },
+                        new
+                        {
+                            Id = 39,
+                            Email = "vasile.georgescu@apia.ro",
+                            Name = "Vasile Georgescu",
+                            Password = "d4f0bc5a29de06b510f9aa428f1eedba926012b591fef7a518e776a7c9bd1824",
+                            Phone = "0700000003",
+                            Role = "Agent"
+                        },
+                        new
+                        {
+                            Id = 40,
+                            Email = "elena.dumitrescu@apia.ro",
+                            Name = "Elena Dumitrescu",
+                            Password = "d4f0bc5a29de06b510f9aa428f1eedba926012b591fef7a518e776a7c9bd1824",
+                            Phone = "0700000004",
+                            Role = "Agent"
+                        },
+                        new
+                        {
+                            Id = 41,
+                            Email = "mihai.marin@apia.ro",
+                            Name = "Mihai Marin",
+                            Password = "d4f0bc5a29de06b510f9aa428f1eedba926012b591fef7a518e776a7c9bd1824",
+                            Phone = "0700000005",
+                            Role = "Agent"
+                        },
+                        new
+                        {
+                            Id = 42,
+                            Email = "ana.vasilescu@apia.ro",
+                            Name = "Ana Vasilescu",
+                            Password = "d4f0bc5a29de06b510f9aa428f1eedba926012b591fef7a518e776a7c9bd1824",
+                            Phone = "0700000006",
+                            Role = "Agent"
+                        },
+                        new
+                        {
+                            Id = 43,
+                            Email = "cristian.ene@apia.ro",
+                            Name = "Cristian Ene",
+                            Password = "d4f0bc5a29de06b510f9aa428f1eedba926012b591fef7a518e776a7c9bd1824",
+                            Phone = "0700000007",
+                            Role = "Agent"
+                        },
+                        new
+                        {
+                            Id = 46,
+                            Email = "ioana.neagu@apia.ro",
+                            Name = "Ioana Neagu",
+                            Password = "d4f0bc5a29de06b510f9aa428f1eedba926012b591fef7a518e776a7c9bd1824",
+                            Phone = "0700000010",
+                            Role = "Agent"
+                        },
+                        new
+                        {
+                            Id = 48,
+                            Email = "monica.florescu@apia.ro",
+                            Name = "Monica Florescu",
+                            Password = "d4f0bc5a29de06b510f9aa428f1eedba926012b591fef7a518e776a7c9bd1824",
+                            Phone = "0700000012",
+                            Role = "Agent"
+                        },
+                        new
+                        {
+                            Id = 49,
+                            Email = "george.petrescu@apia.ro",
+                            Name = "George Petrescu",
+                            Password = "d4f0bc5a29de06b510f9aa428f1eedba926012b591fef7a518e776a7c9bd1824",
+                            Phone = "0700000013",
+                            Role = "Agent"
+                        },
+                        new
+                        {
+                            Id = 50,
+                            Email = "daniela.voicu@apia.ro",
+                            Name = "Daniela Voicu",
+                            Password = "d4f0bc5a29de06b510f9aa428f1eedba926012b591fef7a518e776a7c9bd1824",
+                            Phone = "0700000014",
+                            Role = "Agent"
                         });
+                });
+
+            modelBuilder.Entity("LandFundingRequest", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AgentComment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("FarmerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FarmerId")
+                        .IsUnique();
+
+                    b.ToTable("LandFundingRequests");
                 });
 
             modelBuilder.Entity("API.Models.Agent", b =>
@@ -638,15 +1142,26 @@ namespace API.Migrations
 
             modelBuilder.Entity("API.Models.Animal", b =>
                 {
+                    b.HasOne("API.Models.AnimalFundingRequest", null)
+                        .WithMany("Animals")
+                        .HasForeignKey("AnimalFundingRequestId");
+
                     b.HasOne("API.Models.Farmer", "Farmer")
                         .WithMany("Animals")
                         .HasForeignKey("FarmerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("API.Models.Land", null)
-                        .WithMany("Animals")
-                        .HasForeignKey("LandId");
+                    b.Navigation("Farmer");
+                });
+
+            modelBuilder.Entity("API.Models.AnimalFundingRequest", b =>
+                {
+                    b.HasOne("API.Models.Farmer", "Farmer")
+                        .WithOne("AnimalFundingRequest")
+                        .HasForeignKey("API.Models.AnimalFundingRequest", "FarmerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Farmer");
                 });
@@ -681,6 +1196,25 @@ namespace API.Migrations
                     b.Navigation("Farmer");
                 });
 
+            modelBuilder.Entity("API.Models.FarmerSupply", b =>
+                {
+                    b.HasOne("API.Models.Farmer", "Farmer")
+                        .WithMany("FarmerSupplies")
+                        .HasForeignKey("FarmerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Models.Supply", "Supply")
+                        .WithMany("FarmerSupplies")
+                        .HasForeignKey("SupplyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Farmer");
+
+                    b.Navigation("Supply");
+                });
+
             modelBuilder.Entity("API.Models.Land", b =>
                 {
                     b.HasOne("API.Models.Farmer", "Farmer")
@@ -689,29 +1223,38 @@ namespace API.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("LandFundingRequest", null)
+                        .WithMany("Lands")
+                        .HasForeignKey("LandFundingRequestId");
+
                     b.Navigation("Farmer");
                 });
 
             modelBuilder.Entity("API.Models.MarketItem", b =>
                 {
+                    b.HasOne("API.Models.Farmer", "BuyerFarmer")
+                        .WithMany()
+                        .HasForeignKey("BuyerFarmerId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
                     b.HasOne("API.Models.Farmer", "SellerFarmer")
                         .WithMany("MarketSales")
-                        .HasForeignKey("SellerFarmerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SellerFarmerId");
+
+                    b.Navigation("BuyerFarmer");
 
                     b.Navigation("SellerFarmer");
                 });
 
-            modelBuilder.Entity("API.Models.Supply", b =>
+            modelBuilder.Entity("LandFundingRequest", b =>
                 {
-                    b.HasOne("API.Models.Animal", "Animal")
-                        .WithMany("Supplies")
-                        .HasForeignKey("AnimalId")
+                    b.HasOne("API.Models.Farmer", "Farmer")
+                        .WithOne("LandFundingRequest")
+                        .HasForeignKey("LandFundingRequest", "FarmerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Animal");
+                    b.Navigation("Farmer");
                 });
 
             modelBuilder.Entity("API.Models.Agency", b =>
@@ -724,25 +1267,31 @@ namespace API.Migrations
                     b.Navigation("Farmers");
                 });
 
-            modelBuilder.Entity("API.Models.Animal", b =>
+            modelBuilder.Entity("API.Models.AnimalFundingRequest", b =>
                 {
-                    b.Navigation("Supplies");
+                    b.Navigation("Animals");
                 });
 
             modelBuilder.Entity("API.Models.Farmer", b =>
                 {
+                    b.Navigation("AnimalFundingRequest");
+
                     b.Navigation("Animals");
 
+                    b.Navigation("FarmerSupplies");
+
                     b.Navigation("FarmersRatings");
+
+                    b.Navigation("LandFundingRequest");
 
                     b.Navigation("Lands");
 
                     b.Navigation("MarketSales");
                 });
 
-            modelBuilder.Entity("API.Models.Land", b =>
+            modelBuilder.Entity("API.Models.Supply", b =>
                 {
-                    b.Navigation("Animals");
+                    b.Navigation("FarmerSupplies");
                 });
 
             modelBuilder.Entity("API.Models.User", b =>
@@ -752,6 +1301,11 @@ namespace API.Migrations
 
                     b.Navigation("Farmer")
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("LandFundingRequest", b =>
+                {
+                    b.Navigation("Lands");
                 });
 #pragma warning restore 612, 618
         }

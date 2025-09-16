@@ -14,6 +14,10 @@ namespace API.Models
         [ForeignKey("UserId")]
         public User User { get; set; }
         public string Name { get; set; }
+        public string Email { get; set; }
+        [NotMapped]
+        public string Phone => User?.Phone;
+
         public string Location { get; set; }
         public decimal Budget { get; set; }
         public string Category { get; set; }
@@ -27,6 +31,10 @@ namespace API.Models
         public List<FarmerRating> FarmersRatings { get; set; }
 
         public List<MarketItem> MarketSales { get; set; } = new();
+        public LandFundingRequest? LandFundingRequest { get; set; }
+        public AnimalFundingRequest? AnimalFundingRequest { get; set; }
+        public List<FarmerSupply> FarmerSupplies { get; set; } = new();
+
     }
 
 }

@@ -76,7 +76,7 @@ namespace API.Controllers
             }
         }
         [HttpGet("{agentId}/farmers")]
-        public IActionResult GetAnimalSupplies(int agentId)
+        public IActionResult GetAgentFarmers(int agentId)
         {
             try
             {
@@ -92,5 +92,43 @@ namespace API.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+        [HttpGet("by-user/{userId}")]
+        public IActionResult GetAgentByUserId(int userId)
+        {
+            try
+            {
+                var farmer = agentManager.GetAgentByUserId(userId);
+                if (farmer == null)
+                    return NotFound($"No farmer found for user ID {userId}");
+                return Ok(farmer);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpGet("{agentId}/farmers/search")]
+        public IActionResult SearchAgentFarmers(int agentId, [FromQuery] string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return BadRequest("Search term 'name' is required.");
+            }
+
+            try
+            {
+                var filteredFarmers = agentManager.SearchAgentFarmersByName(agentId, name);
+                return Ok(filteredFarmers);
+            }
+            catch (ArgumentException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
     }
 }

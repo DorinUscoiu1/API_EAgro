@@ -2,6 +2,13 @@
 using Microsoft.AspNetCore.Mvc;
 using API.Services;
 using API.DTOs;
+using System.Security.Claims;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using System.Net.WebSockets;
+using Microsoft.AspNetCore.Authorization;
+using API.Models;
 namespace API.Controllers
 {
     [Route("api/[controller]")]
@@ -9,16 +16,18 @@ namespace API.Controllers
     public class UserController : ControllerBase
     {
         private readonly UserManager userManager;
-
-        public UserController()
+        private readonly IConfiguration _configuration;
+        public UserController(IConfiguration configuration)
         {
             userManager = new UserManager();
+            this._configuration = configuration;
         }
         [HttpGet]
         public IActionResult GetUsers()
         {
             return Ok(userManager.GetAllUsers());
         }
+        [Authorize]
         [HttpGet]
         [Route("{id}")]
         public IActionResult GetUser(int id)
@@ -82,19 +91,20 @@ namespace API.Controllers
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginDto loginDto)
         {
-            try
+            var user = userManager.Login(loginDto);
+            if (user == null)
             {
-                var user = userManager.Login(loginDto);
-                return Ok(user);
+                return Unauthorized("Invalid credentials.");
             }
-            catch (ArgumentException ex)
+
+            var token = GenerateJwtToken(user);
+
+            return Ok(new
             {
-                return BadRequest(ex.Message);
-            }
-            catch
-            {
-                return StatusCode(500, "An internal error occured");
-            }
+                token,
+                userId = user.Id,
+                role = user.Role
+            });
         }
 
         [HttpPost("register")]
@@ -114,5 +124,29 @@ namespace API.Controllers
                 return StatusCode(500, "An internal server occured");
             }
         }
+
+        private string GenerateJwtToken(UserDto user)
+        {
+            var claims = new[]
+            {
+        new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+        new Claim(ClaimTypes.Email, user.Email),
+        new Claim(ClaimTypes.Role, user.Role)
+    };
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            var token = new JwtSecurityToken(
+                issuer: _configuration["Jwt:Issuer"],
+                audience: _configuration["Jwt:Audience"],
+                claims: claims,
+                expires: DateTime.UtcNow.AddHours(48),
+                signingCredentials: creds
+            );
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
     }
 }

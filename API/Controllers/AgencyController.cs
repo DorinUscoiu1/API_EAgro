@@ -66,11 +66,16 @@ namespace API.Controllers
                 agencyManager.RemoveAgency(agencyId);
                 return Ok();
             }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
             catch (Exception ex)
             {
                 return NotFound(ex.Message);
             }
         }
+
         [HttpGet("{agencyId}/agents")]
         public IActionResult GetAgencyAgents(int agencyId)
         {

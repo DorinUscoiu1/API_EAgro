@@ -14,11 +14,7 @@ namespace API.Models
         public string Quality { get; set; }
         public decimal Price { get; set; }
 
-        // Relația cu Animal
-        public int AnimalId { get; set; }
-
-        [ForeignKey("AnimalId")]
-        public Animal Animal { get; set; }
+        public List<FarmerSupply> FarmerSupplies { get; set; } = new();
     }
 
 

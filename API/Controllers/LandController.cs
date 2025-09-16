@@ -28,6 +28,8 @@ namespace API.Controllers
             }
             return NotFound($"land with ID {landId} not found.");
         }
+
+
         [HttpPost]
         public IActionResult AddNewLand([FromBody] LandDto landDto)
         {
@@ -75,5 +77,12 @@ namespace API.Controllers
                 return NotFound(ex.Message);
             }
         }
+        [HttpGet("was-sold-to-owner/{landId}/{farmerId}")]
+        public IActionResult WasLandSoldToOwner(int landId, int farmerId)
+        {
+            bool wasBought = landManager.IsLandBoughtByCurrentOwner(landId, farmerId);
+            return Ok(wasBought);
+        }
+
     }
 }
