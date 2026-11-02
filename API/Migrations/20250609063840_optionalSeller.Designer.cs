@@ -219,7 +219,7 @@ namespace API.Migrations
                         {
                             Id = 12,
                             AgencyId = 13,
-                            Email = "ion.popescu@apia.ro",
+                            Email = "ion.popescu@example.ro",
                             Name = "Ion Popescu",
                             UserId = 37
                         },
@@ -227,7 +227,7 @@ namespace API.Migrations
                         {
                             Id = 13,
                             AgencyId = 14,
-                            Email = "maria.ionescu@apia.ro",
+                            Email = "maria.ionescu@example.ro",
                             Name = "Maria Ionescu",
                             UserId = 38
                         },
@@ -235,7 +235,7 @@ namespace API.Migrations
                         {
                             Id = 14,
                             AgencyId = 15,
-                            Email = "vasile.georgescu@apia.ro",
+                            Email = "vasile.georgescu@example.ro",
                             Name = "Vasile Georgescu",
                             UserId = 39
                         },
@@ -243,7 +243,7 @@ namespace API.Migrations
                         {
                             Id = 15,
                             AgencyId = 16,
-                            Email = "elena.dumitrescu@apia.ro",
+                            Email = "elena.dumitrescu@example.ro",
                             Name = "Elena Dumitrescu",
                             UserId = 40
                         },
@@ -251,7 +251,7 @@ namespace API.Migrations
                         {
                             Id = 16,
                             AgencyId = 17,
-                            Email = "mihai.marin@apia.ro",
+                            Email = "mihai.marin@example.ro",
                             Name = "Mihai Marin",
                             UserId = 41
                         },
@@ -259,7 +259,7 @@ namespace API.Migrations
                         {
                             Id = 17,
                             AgencyId = 18,
-                            Email = "ana.vasilescu@apia.ro",
+                            Email = "ana.vasilescu@example.ro",
                             Name = "Ana Vasilescu",
                             UserId = 42
                         },
@@ -267,7 +267,7 @@ namespace API.Migrations
                         {
                             Id = 18,
                             AgencyId = 19,
-                            Email = "cristian.ene@apia.ro",
+                            Email = "cristian.ene@example.ro",
                             Name = "Cristian Ene",
                             UserId = 43
                         },
@@ -275,7 +275,7 @@ namespace API.Migrations
                         {
                             Id = 21,
                             AgencyId = 22,
-                            Email = "ioana.neagu@apia.ro",
+                            Email = "ioana.neagu@example.ro",
                             Name = "Ioana Neagu",
                             UserId = 46
                         },
@@ -283,7 +283,7 @@ namespace API.Migrations
                         {
                             Id = 23,
                             AgencyId = 13,
-                            Email = "monica.florescu@apia.ro",
+                            Email = "monica.florescu@example.ro",
                             Name = "Monica Florescu",
                             UserId = 48
                         },
@@ -291,7 +291,7 @@ namespace API.Migrations
                         {
                             Id = 24,
                             AgencyId = 14,
-                            Email = "george.petrescu@apia.ro",
+                            Email = "george.petrescu@example.ro",
                             Name = "George Petrescu",
                             UserId = 49
                         },
@@ -299,7 +299,7 @@ namespace API.Migrations
                         {
                             Id = 25,
                             AgencyId = 15,
-                            Email = "daniela.voicu@apia.ro",
+                            Email = "daniela.voicu@example.ro",
                             Name = "Daniela Voicu",
                             UserId = 50
                         });
@@ -988,7 +988,7 @@ namespace API.Migrations
                         new
                         {
                             Id = 15,
-                            Email = "dorin.uscoiu@apia.ro",
+                            Email = "dorin.uscoiu@example.ro",
                             Name = "Dorin Uscoiu",
                             Password = "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918",
                             Phone = "0777889900",
@@ -997,7 +997,7 @@ namespace API.Migrations
                         new
                         {
                             Id = 37,
-                            Email = "ion.popescu@apia.ro",
+                            Email = "ion.popescu@example.ro",
                             Name = "Ion Popescu",
                             Password = "d4f0bc5a29de06b510f9aa428f1eedba926012b591fef7a518e776a7c9bd1824",
                             Phone = "0700000001",
@@ -1006,7 +1006,7 @@ namespace API.Migrations
                         new
                         {
                             Id = 38,
-                            Email = "maria.ionescu@apia.ro",
+                            Email = "maria.ionescu@example.ro",
                             Name = "Maria Ionescu",
                             Password = "d4f0bc5a29de06b510f9aa428f1eedba926012b591fef7a518e776a7c9bd1824",
                             Phone = "0700000002",
@@ -1015,7 +1015,7 @@ namespace API.Migrations
                         new
                         {
                             Id = 39,
-                            Email = "vasile.georgescu@apia.ro",
+                            Email = "vasile.georgescu@example.ro",
                             Name = "Vasile Georgescu",
                             Password = "d4f0bc5a29de06b510f9aa428f1eedba926012b591fef7a518e776a7c9bd1824",
                             Phone = "0700000003",
@@ -1024,7 +1024,7 @@ namespace API.Migrations
                         new
                         {
                             Id = 40,
-                            Email = "elena.dumitrescu@apia.ro",
+                            Email = "elena.dumitrescu@example.ro",
                             Name = "Elena Dumitrescu",
                             Password = "d4f0bc5a29de06b510f9aa428f1eedba926012b591fef7a518e776a7c9bd1824",
                             Phone = "0700000004",
@@ -1033,7 +1033,7 @@ namespace API.Migrations
                         new
                         {
                             Id = 41,
-                            Email = "mihai.marin@apia.ro",
+                            Email = "mihai.marin@example.ro",
                             Name = "Mihai Marin",
                             Password = "d4f0bc5a29de06b510f9aa428f1eedba926012b591fef7a518e776a7c9bd1824",
                             Phone = "0700000005",
@@ -1042,7 +1042,7 @@ namespace API.Migrations
                         new
                         {
                             Id = 42,
-                            Email = "ana.vasilescu@apia.ro",
+                            Email = "ana.vasilescu@example.ro",
                             Name = "Ana Vasilescu",
                             Password = "d4f0bc5a29de06b510f9aa428f1eedba926012b591fef7a518e776a7c9bd1824",
                             Phone = "0700000006",
@@ -1051,7 +1051,7 @@ namespace API.Migrations
                         new
                         {
                             Id = 43,
-                            Email = "cristian.ene@apia.ro",
+                            Email = "cristian.ene@example.ro",
                             Name = "Cristian Ene",
                             Password = "d4f0bc5a29de06b510f9aa428f1eedba926012b591fef7a518e776a7c9bd1824",
                             Phone = "0700000007",
@@ -1060,7 +1060,7 @@ namespace API.Migrations
                         new
                         {
                             Id = 46,
-                            Email = "ioana.neagu@apia.ro",
+                            Email = "ioana.neagu@example.ro",
                             Name = "Ioana Neagu",
                             Password = "d4f0bc5a29de06b510f9aa428f1eedba926012b591fef7a518e776a7c9bd1824",
                             Phone = "0700000010",
@@ -1069,7 +1069,7 @@ namespace API.Migrations
                         new
                         {
                             Id = 48,
-                            Email = "monica.florescu@apia.ro",
+                            Email = "monica.florescu@example.ro",
                             Name = "Monica Florescu",
                             Password = "d4f0bc5a29de06b510f9aa428f1eedba926012b591fef7a518e776a7c9bd1824",
                             Phone = "0700000012",
@@ -1078,7 +1078,7 @@ namespace API.Migrations
                         new
                         {
                             Id = 49,
-                            Email = "george.petrescu@apia.ro",
+                            Email = "george.petrescu@example.ro",
                             Name = "George Petrescu",
                             Password = "d4f0bc5a29de06b510f9aa428f1eedba926012b591fef7a518e776a7c9bd1824",
                             Phone = "0700000013",
@@ -1087,7 +1087,7 @@ namespace API.Migrations
                         new
                         {
                             Id = 50,
-                            Email = "daniela.voicu@apia.ro",
+                            Email = "daniela.voicu@example.ro",
                             Name = "Daniela Voicu",
                             Password = "d4f0bc5a29de06b510f9aa428f1eedba926012b591fef7a518e776a7c9bd1824",
                             Phone = "0700000014",

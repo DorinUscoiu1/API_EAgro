@@ -171,9 +171,9 @@ namespace API.Migrations
                 columns: new[] { "Id", "Email", "Name", "Password", "Phone", "Role" },
                 values: new object[,]
                 {
-                    { 44, "silvia.radu@apia.ro", "Silvia Radu", "d4f0bc5a29de06b510f9aa428f1eedba926012b591fef7a518e776a7c9bd1824", "0700000008", "Agent" },
-                    { 45, "andrei.pavel@apia.ro", "Andrei Pavel", "d4f0bc5a29de06b510f9aa428f1eedba926012b591fef7a518e776a7c9bd1824", "0700000009", "Agent" },
-                    { 47, "radu.iliescu@apia.ro", "Radu Iliescu", "d4f0bc5a29de06b510f9aa428f1eedba926012b591fef7a518e776a7c9bd1824", "0700000011", "Agent" }
+                    { 44, "silvia.radu@example.ro", "Silvia Radu", "d4f0bc5a29de06b510f9aa428f1eedba926012b591fef7a518e776a7c9bd1824", "0700000008", "Agent" },
+                    { 45, "andrei.pavel@example.ro", "Andrei Pavel", "d4f0bc5a29de06b510f9aa428f1eedba926012b591fef7a518e776a7c9bd1824", "0700000009", "Agent" },
+                    { 47, "radu.iliescu@example.ro", "Radu Iliescu", "d4f0bc5a29de06b510f9aa428f1eedba926012b591fef7a518e776a7c9bd1824", "0700000011", "Agent" }
                 });
 
             migrationBuilder.InsertData(
@@ -181,9 +181,9 @@ namespace API.Migrations
                 columns: new[] { "Id", "AgencyId", "Email", "Name", "UserId" },
                 values: new object[,]
                 {
-                    { 19, 20, "silvia.radu@apia.ro", "Silvia Radu", 44 },
-                    { 20, 21, "andrei.pavel@apia.ro", "Andrei Pavel", 45 },
-                    { 22, 23, "radu.iliescu@apia.ro", "Radu Iliescu", 47 }
+                    { 19, 20, "silvia.radu@example.ro", "Silvia Radu", 44 },
+                    { 20, 21, "andrei.pavel@example.ro", "Andrei Pavel", 45 },
+                    { 22, 23, "radu.iliescu@example.ro", "Radu Iliescu", 47 }
                 });
         }
     }

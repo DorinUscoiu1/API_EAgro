@@ -13,7 +13,7 @@ namespace API.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Email", "Name", "Password", "Role" },
-                values: new object[] { 15, "dorin.uscoiu@apia.ro", "Dorin Uscoiu", "admin", "Admin" });
+                values: new object[] { 15, "dorin.uscoiu@example.ro", "Dorin Uscoiu", "admin", "Admin" });
         }
 
         /// <inheritdoc />

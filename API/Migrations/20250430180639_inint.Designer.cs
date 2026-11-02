@@ -630,7 +630,7 @@ namespace API.Migrations
                         new
                         {
                             Id = 15,
-                            Email = "dorin.uscoiu@apia.ro",
+                            Email = "dorin.uscoiu@example.ro",
                             Name = "Dorin Uscoiu",
                             Password = "admin",
                             Role = "Admin"
